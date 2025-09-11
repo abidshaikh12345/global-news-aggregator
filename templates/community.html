@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>👥 Community News</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+  <div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6 text-green-400">👥 Community News</h1>
+
+    {% if articles %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for article in articles %}
+      <div class="bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:scale-105 transition">
+        {% if article.image %}
+        <img src="{{ article.image }}" class="h-40 w-full object-cover" alt="News image">
+        {% endif %}
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-2 text-white">{{ article.title }}</h2>
+          {% if article.description %}
+          <p class="text-gray-400 text-sm mb-3">{{ article.description }}</p>
+          {% endif %}
+          {% if article.url %}
+          <a href="{{ article.url }}" target="_blank" class="text-blue-400 font-medium hover:underline">Read more →</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-gray-400">
+      No community articles yet. Be the first to 
+      <a href="/submit" class="text-purple-400 hover:underline">submit one</a>!
+    </p>
+    {% endif %}
+
+    <div class="text-center mt-8">
+      <a href="/" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

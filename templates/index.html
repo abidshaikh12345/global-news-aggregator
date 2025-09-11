@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌍 Global News Aggregator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans">
+  <div class="container mx-auto p-6">
+
+    <!-- Navbar -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-blue-400">🌍 Global News Aggregator</h1>
+      <div>
+        <a href="/community" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white">Community News</a>
+        <a href="/submit" class="ml-3 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-white">Submit News</a>
+      </div>
+    </div>
+
+    <!-- Country Selector -->
+    <form method="get" class="flex justify-center mb-6">
+      <select name="country" class="p-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200">
+        {% for name, code in countries.items() %}
+        <option value="{{ code }}" {% if code == country %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="ml-3 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white">Go</button>
+    </form>
+
+    <!-- Trending Section -->
+    <h2 class="text-2xl font-bold text-yellow-400 mb-4">🔥 Trending Now</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+      {% for t in trending %}
+      <div class="bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:scale-105 transition">
+        {% if t.image %}
+        <img src="{{ t.image }}" class="h-32 w-full object-cover" alt="Trending image">
+        {% endif %}
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-2 text-white">{{ t.title }}</h2>
+          <a href="{{ t.url }}" target="_blank" class="text-yellow-400 font-medium hover:underline">Read more →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Latest News Section -->
+    <h2 class="text-2xl font-bold text-blue-400 mb-4">📰 Latest News</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for article in articles %}
+      <div class="bg-gray-800 rounded-2xl shadow-md overflow-hidden hover:scale-105 transition">
+        {% if article.image %}
+        <img src="{{ article.image }}" class="h-40 w-full object-cover" alt="News image">
+        {% endif %}
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-2 text-white">{{ article.title }}</h2>
+          {% if article.description %}
+          <p class="text-gray-400 text-sm mb-3">{{ article.description }}</p>
+          {% endif %}
+          <a href="{{ article.url }}" target="_blank" class="text-blue-400 font-medium hover:underline">Read more →</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
