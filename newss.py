@@ -5,7 +5,7 @@ import feedparser
 app = Flask(__name__)
 
 # Your Mediastack API Key
-API_KEY = "e73aec3f7db74844d4e0bba97e876434"
+API_KEY = "5af77d616ce610392db2feae03c36115"
 
 # List of countries
 COUNTRIES = {
@@ -106,3 +106,4 @@ def community():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
